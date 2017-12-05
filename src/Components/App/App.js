@@ -17,12 +17,12 @@ class App extends Component {
 
 
      addTrack(track){
-       if(this.state.playlistTracks.includes(track.id)===false)
+       if(!this.state.playlistTracks.includes(track))
        {
-         this.state.playlistTracks.push(track);
-         this.setState({playlistTracks: track});
+         let tracks = this.state.playlistTracks;
+         tracks.push(track);
+         this.setState({playlistTracks: tracks});
        }
-
      }
 
   render() {
@@ -32,7 +32,9 @@ class App extends Component {
         <div className="App">
           <SearchBar />
          <div className="App-playlist">
-          <SearchResults searchResults={this.state.searchResults} />
+          <SearchResults
+            searchResults={this.state.searchResults}
+            onAdd={this.addTrack}/>
           <Playlist
             playlistName={this.state.playlistName}
             playlistTracks = {this.state.playlistTracks} />
