@@ -5,6 +5,26 @@ import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      searchResults: [{ name: '',artist: '', album: ''}],
+      playlistName: 'Hot Fire',
+      playlistTracks: [{ name: '',artist: '', album: ''}]
+    };
+      this.addTrack = this.addTrack.bind(this);
+     }
+
+
+     addTrack(track){
+       if(this.state.playlistTracks.includes(track.id)===false)
+       {
+         this.state.playlistTracks.push(track);
+         this.setState({playlistTracks: track});
+       }
+
+     }
+
   render() {
     return (
       <div>
@@ -12,8 +32,10 @@ class App extends Component {
         <div className="App">
           <SearchBar />
          <div className="App-playlist">
-          <SearchResults />
-          <Playlist />
+          <SearchResults searchResults={this.state.searchResults} />
+          <Playlist
+            playlistName={this.state.playlistName}
+            playlistTracks = {this.state.playlistTracks} />
           </div>
         </div>
       </div>
