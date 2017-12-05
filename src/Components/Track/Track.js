@@ -8,7 +8,11 @@ class Track extends React.Component{
  }
 
   renderAction(){
-   return isRemoval ? '-' : '+';
+   return this.props.isRemoval ? '-' : '+';
+  }
+
+  addTrack(){
+    this.props.onAdd(this.props.track);
   }
 
   render(){
