@@ -11,6 +11,7 @@ class Playlist extends React.Component {
   handleNameChange(event){
     this.props.onChange(event.target.value)
   }
+  
   render(){
     return (
       <div className="Playlist">
