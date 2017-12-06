@@ -15,15 +15,22 @@ class App extends Component {
       this.addTrack = this.addTrack.bind(this);
      }
 
-
-     addTrack(track){
-       if(!this.state.playlistTracks.includes(track))
+  addTrack(track){
+    let tracks = this.state.playlistTracks;
+    if(!this.state.playlistTracks.includes(track))
        {
-         let tracks = this.state.playlistTracks;
          tracks.push(track);
          this.setState({playlistTracks: tracks});
        }
      }
+
+  removeTrack(track){
+    let tracks = this.state.playlistTracks;
+    if(this.state.playlistTracks.includes(track)){
+      tracks.filter(track => track.id);
+      this.setState({playlistTracks:  tracks});
+    }
+  }
 
   render() {
     return (
