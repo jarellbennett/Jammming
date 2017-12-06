@@ -49,6 +49,7 @@ class App extends Component {
             searchResults={this.state.searchResults}
             onAdd={this.addTrack}/>
           <Playlist
+            onNameChange={this.updatePlaylistName}
             playlistName={this.state.playlistName}
             playlistTracks = {this.state.playlistTracks} />
           </div>
