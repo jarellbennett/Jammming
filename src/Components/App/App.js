@@ -13,6 +13,7 @@ class App extends Component {
       playlistTracks: [{ name: '',artist: '', album: ''}]
     };
       this.addTrack = this.addTrack.bind(this);
+      this.removeTrack = this.removeTrack.bind(this);
      }
 
   addTrack(track){
@@ -27,7 +28,7 @@ class App extends Component {
   removeTrack(track){
     let tracks = this.state.playlistTracks;
     if(this.state.playlistTracks.includes(track)){
-      tracks.filter(track => track.id);
+      tracks.splice(tracks.indexOf(track),1);
       this.setState({playlistTracks:  tracks});
     }
   }
