@@ -8,7 +8,8 @@ class Playlist extends React.Component {
       <div className="Playlist">
         <input defaultValue={'New Playlist'}/>
         // Add a TrackList component
-        <TrackList tracks={this.props.playlistTracks} isRemoval={true} />
+        <TrackList tracks={this.props.playlistTracks} isRemoval={true}
+          onRemove={this.props.onRemove} />
         <a className="Playlist-save">SAVE TO SPOTIFY</a>
       </div>
     );
