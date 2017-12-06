@@ -9,11 +9,12 @@ class App extends Component {
     super(props);
     this.state = {
       searchResults: [{ name: '',artist: '', album: ''}],
-      playlistName: 'Hot Fire',
+      playlistName: 'New Playlist',
       playlistTracks: [{ name: '',artist: '', album: ''}]
     };
       this.addTrack = this.addTrack.bind(this);
       this.removeTrack = this.removeTrack.bind(this);
+      this.updatePlaylistName = this.updatePlaylistName.bind(this);
      }
 
   addTrack(track){
@@ -31,6 +32,10 @@ class App extends Component {
       tracks.splice(tracks.indexOf(track),1);
       this.setState({playlistTracks:  tracks});
     }
+  }
+
+  updatePlaylistName(name){
+    this.setState({playlistName: name})
   }
 
   render() {
