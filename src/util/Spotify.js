@@ -38,6 +38,17 @@ const Spotify = {
    });
   },
 
-  
+  savePlaylist(playlistName,trackUris){
+    if(!playlistName || !trackUris){
+      return;
+    }
+    accessToken = Spotify.getAccessToken();
+    let userId;
+    return fetch('https://api.spotify.com/v1/me',{ headers: {Authorization: `Bearer ${accessToken}`})
+    .then(response => response.json())
+    .then(jsonResponse => {
+      userId = jsonResponse.id; })
+
+  }
 }
 export default Spotify;
