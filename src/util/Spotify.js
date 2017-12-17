@@ -44,11 +44,38 @@ const Spotify = {
     }
     accessToken = Spotify.getAccessToken();
     let userId;
-    return fetch('https://api.spotify.com/v1/me',{ headers: {Authorization: `Bearer ${accessToken}`})
+    return fetch('https://api.spotify.com/v1/me',{ headers: {Authorization: `Bearer ${accessToken}`}})
     .then(response => response.json())
     .then(jsonResponse => {
-      userId = jsonResponse.id; })
+      userId = jsonResponse.id;
 
+      return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`,
+        {
+          headers: {Authorization: `Bearer ${accessToken}`},
+          method:'POST',
+          body:JSON.stringify({name: playlistName})
+        }).then(response => {
+          if(response.ok){
+            return response.json();
+          } throw new Error ('Request Failed');},
+        networkError=> console.log(networkError.message))
+        .then(jsonResponse => {
+          let playlistId = jsonResponse.id;
+          return fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`,
+          {
+            headers: {Authorization: `Bearer ${accessToken}`},
+            method:'POST',
+            body:JSON.stringify({uris: trackUris})
+          }).then(response => {
+            if(response.ok){
+              return response.json();
+            } throw new Error ('Request Failed');},
+          networkError=> console.log(networkError.message))
+          .then(jsonResponse=>{
+            playlistId = jsonResponse.id;
+          })
+        })
+    })
   }
 }
 export default Spotify;
