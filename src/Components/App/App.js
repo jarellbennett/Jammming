@@ -58,12 +58,19 @@ class App extends Component {
     });
   }
 
+  onKey(event){
+    const e = event.which || event.keyCode;
+    if(e.which === 13){
+      this.search();
+    }
+  }
+
   render() {
     return (
       <div>
         <h1>Ja<span className="highlight">mmm</span>ing</h1>
         <div className="App">
-          <SearchBar onSearch={this.search}/>
+          <SearchBar onKeyPress={this.onKey} onSearch={this.search}/>
          <div className="App-playlist">
           <SearchResults
             searchResults={this.state.searchResults}
