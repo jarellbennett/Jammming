@@ -15,13 +15,21 @@ class SearchBar extends React.Component {
     this.props.onSearch(this.state.term)
   }
 
+  onKey(event){
+    const e = event.which || event.keyCode;
+    if(e === 13){
+      this.search();
+    }
+  }
+
   handleTermChange(event){
     this.setState({term: event.target.value});
   }
+
   render(){
    return (
      <div className="SearchBar">
-       <input onChange={this.handleTermChange} placeholder="Enter A Song, Album, or Artist" />
+       <input onkeypress={this.onKey()} onChange={this.handleTermChange} placeholder="Enter A Song, Album, or Artist" />
        <a onClick={this.search}>SEARCH</a>
      </div>
    );
